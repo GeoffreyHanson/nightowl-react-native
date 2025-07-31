@@ -1,0 +1,25 @@
+{
+  "lineWidth": 100,
+  "indentWidth": 2,
+  "useTabs": false,
+  "newLineKind": "lf",
+  "semiColons": true,
+  "quoteStyle": "alwaysSingle",
+  "trailingCommas": "onlyMultiLine",
+  "typescript": {
+    "arrowFunction.useParentheses": "preferNot"
+  },
+  "includes": ["**/*.{ts,tsx,js,jsx,json,md}"],
+  "excludes": [
+    "**/node_modules",
+    "**/build",
+    "**/dist",
+    "**/.expo",
+    "**/coverage"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.88.7.wasm",
+    "https://plugins.dprint.dev/json-0.19.1.wasm",
+    "https://plugins.dprint.dev/markdown-0.16.3.wasm"
+  ]
+}

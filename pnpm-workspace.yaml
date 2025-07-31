@@ -1,0 +1,11 @@
+packages:
+  - apps/*
+  - packages/*
+
+nodeLinker: hoisted
+
+onlyBuiltDependencies:
+  - dprint
+  - esbuild
+  - oxc-resolver
+  - unrs-resolver

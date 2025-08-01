@@ -1,6 +1,6 @@
 # Night Owl
 
-A React Native application to find late-night coffee shops using the Yelp API.
+A React Native application to find late-night coffee shops using the Google Places API.
 
 ## Architecture
 
@@ -14,8 +14,8 @@ graph TB
 
     subgraph "Backend For Frontend"
         Express[Express Server]
-        YelpService[Yelp Service]
-        Express --> YelpService
+        GoogleService[Google Places Service]
+        Express --> GoogleService
     end
 
     subgraph "Shared"
@@ -24,12 +24,12 @@ graph TB
     end
 
     subgraph "External"
-        Yelp[Yelp Fusion API]
+        Google[Google Places API]
     end
 
     %% Connections
     RN --> |HTTP Requests| Express
-    Express --> |API Calls| Yelp
+    Express --> |API Calls| Google
     RN --> |Uses| Types
     Express --> |Uses| Types
 

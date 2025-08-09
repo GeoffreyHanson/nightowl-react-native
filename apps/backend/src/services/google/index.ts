@@ -70,20 +70,3 @@ export const searchCoffeeShops = async ({
 
   return response;
 };
-
-// export const getPlaceDetails = async (placeId: string): Promise<Place> => {
-//   const response = await client.placeDetails({
-//     id: placeId,
-//     fields: [
-//       "id",
-//       "name",
-//       "rating",
-//       "userRatingsTotal",
-//       "vicinity",
-//       "openingHours",
-//       "geometry",
-//     ],
-//   });
-
-//   return response.place;
-// };

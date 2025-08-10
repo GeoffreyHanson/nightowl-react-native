@@ -44,29 +44,46 @@ if (!process.env.GOOGLE_API_KEY) {
   throw new Error("GOOGLE_API_KEY is required");
 }
 
-const client = new PlacesClient();
+const client = new PlacesClient({
+  fallback: true,
+  apiKey: process.env.GOOGLE_API_KEY,
+});
 
-/**
- * @param latitude
- * @param longitude - West coords are negative, East coords are positive
- * @param radius
- * @returns
- */
 export const searchCoffeeShops = async ({
   latitude,
   longitude,
-  radius = 1000, // default 1km radius
+  radius = 1000,
 }: SearchParams): Promise<ISearchNearbyResponse> => {
-  const [response] = await client.searchNearby({
-    locationRestriction: {
-      circle: {
-        center: { latitude, longitude },
-        radius: radius,
+  const [response] = await client.searchNearby(
+    {
+      locationRestriction: {
+        circle: {
+          center: { latitude, longitude },
+          radius,
+        },
       },
+      includedTypes: ["coffee_shop", "cafe"],
+      excludedTypes: ["convenience_store", "bar", "restaurant", "gas_station"],
+      maxResultCount: 10,
     },
-    includedTypes: ["cafe"],
-    maxResultCount: 10,
-  });
+    {
+      otherArgs: {
+        headers: {
+          "X-Goog-FieldMask": [
+            "places.id",
+            "places.displayName",
+            "places.rating",
+            "places.userRatingCount",
+            "places.types",
+            "places.googleMapsUri",
+            // "places.location",
+            // "places.formattedAddress",
+            // "places.currentOpeningHours.openNow",
+          ].join(","),
+        },
+      },
+    }
+  );
 
   return response;
 };
